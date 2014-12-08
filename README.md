@@ -11,11 +11,13 @@ More info on FoldersPopup: http://code.jeanlalonde.ca/folderspopup/
 <li>Set your custom file manager path and commandline in FPconnect.ini</li>
 </ol>
 
+[Screenshot]: https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.png
+
 <h3>Example</h3>
 
 ```
 [Options]
-AppPath=..\..\Double Commander\doublecmd.exe
+AppPath=..\..\Double Commander \doublecmd.exe
 Commandline=--no-console -L %path%
 ```
 See more examples in FPconnect.ini.
