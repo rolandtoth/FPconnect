@@ -1,9 +1,8 @@
 <h1>FPconnect</h1>
 
-FoldersPopup custom file manager addon
+FPconnect is a FoldersPopup addon that allows integration of any file manager.
 
-http://code.jeanlalonde.ca/folderspopup/
-https://github.com/rolandtoth/FPconnect
+More info on FoldersPopup: http://code.jeanlalonde.ca/folderspopup/
 
 <h2>Usage</h2>
 
@@ -12,12 +11,20 @@ https://github.com/rolandtoth/FPconnect
 <li>Set your custom file manager path and commandline in FPconnect.ini</li>
 </ol>
 
-<h2>Example</h2>
+<h3>Example</h3>
 
 ```
 [Options]
 AppPath=..\..\Double Commander\doublecmd.exe
 Commandline=--no-console -L %path%
 ```
+See more examples in FPconnect.ini.
 
-Licensed under the MIT license
+<h3>License</h3>
+
+Licensed under the MIT license.
+
+FPconnect is provided "as-is" without warranty of any kind, express, implied or otherwise,
+including without limitation, any warranty of merchantability or fitness for a particular purpose.
+In no event shall the author of this software be held liable for data loss, damages,
+loss of profits or any other kind of loss while using or misusing this software.
