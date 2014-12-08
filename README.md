@@ -17,7 +17,7 @@ More info on FoldersPopup: http://code.jeanlalonde.ca/folderspopup/
 
 ```
 [Options]
-AppPath=..\..\Double Commander \doublecmd.exe
+AppPath=..\..\Double Commander\doublecmd.exe
 Commandline=--no-console -L %path%
 ```
 See more examples in FPconnect.ini.
