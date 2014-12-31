@@ -27,6 +27,11 @@ NewTabSwitch=-T
 ```
 See more examples and detailed documentation in [FPconnect.ini](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.ini).
 
+<h3>Feedback</h3>
+
+For feedback, bug reports and feature request please use the comment section here:
+[http://blog.rolandtoth.hu/post/106133423662/fpconnect-for-folderspopup-windows](http://blog.rolandtoth.hu/post/106133423662/fpconnect-for-folderspopup-windows)
+
 <h3>License</h3>
 
 Licensed under the MIT license.
