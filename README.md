@@ -10,7 +10,7 @@ FPconnect is a [FoldersPopup](http://code.jeanlalonde.ca/folderspopup/) addon th
 <li>Set your custom file manager path and commandline parameters in FPconnect.ini</li>
 </ol>
 
-![Screenshot of FPconnect](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.png
+![Screenshot of FPconnect](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.png)
 
 <h3>Example</h3>
 
