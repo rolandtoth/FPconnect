@@ -4,9 +4,9 @@ FPconnect is a [FoldersPopup](http://code.jeanlalonde.ca/folderspopup/) addon th
 
 <h3>Usage</h3>
 
-* Extract [FPconnect.zip](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.zip) to a new folder "FPconnect" in FoldersPopup's directory
-* Set path to "FPconnect.exe" in FoldersPopup Settings ("Third-party File Managers Support" tab)
-* Set your custom file manager path and commandline parameters in FPconnect.ini
+1. Extract [FPconnect.zip](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.zip) to a new folder "FPconnect" in FoldersPopup's directory
+2. Set path to "FPconnect.exe" in FoldersPopup Settings ("Third-party File Managers Support" tab)
+3. Set your custom file manager path and commandline parameters in FPconnect.ini
 
 ![Screenshot of FPconnect](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.png)
 
