@@ -2,6 +2,10 @@
 
 FPconnect is a [FoldersPopup](http://code.jeanlalonde.ca/folderspopup/) addon that allows integration of any file manager that supports commandline navigation.
 
+<h3>Download</h3>
+
+Download and extract [FPconnect.zip](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.zip).
+
 <h2>Usage</h2>
 
 <ol>
@@ -11,11 +15,7 @@ FPconnect is a [FoldersPopup](http://code.jeanlalonde.ca/folderspopup/) addon th
 <li>Set your custom file manager path and commandline parameters in FPconnect.ini</li>
 </ol>
 
-![Screenshot of FPconnect](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.png)
-
-<h3>Download</h3>
-
-[FPconnect.zip](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.zip)
+![Screenshot of FPconnect](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.png
 
 <h3>Example</h3>
 
