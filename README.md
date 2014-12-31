@@ -1,26 +1,31 @@
 <h1>FPconnect</h1>
 
-FPconnect is a FoldersPopup addon that allows integration of any file manager.
-
-More info on FoldersPopup: http://code.jeanlalonde.ca/folderspopup/
+FPconnect is a [FoldersPopup](http://code.jeanlalonde.ca/folderspopup/) addon that allows integration of any file manager that supports commandline navigation.
 
 <h2>Usage</h2>
 
 <ol>
-<li>Set path of "FPconnect.exe" as path to "Total Commander" in FoldersPopup Settings</li>
-<li>Set your custom file manager path and commandline in FPconnect.ini</li>
+<li>Create a new folder "FPconnect" in FoldersPopup's directory</li>
+<li>Copy "FPconnect.exe" and "FPconnect.ini" to the "FPconnect" directory</li>
+<li>Set path to "FPconnect.exe" in FoldersPopup Settings ("Third-party File Managers Support" tab)</li>
+<li>Set your custom file manager path and commandline parameters in FPconnect.ini</li>
 </ol>
 
 ![Screenshot of FPconnect](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.png)
+
+<h3>Download</h3>
+
+[FPconnect.zip](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.zip)
 
 <h3>Example</h3>
 
 ```
 [Options]
-AppPath=..\..\Double Commander\doublecmd.exe
-Commandline=--no-console -L %path%
+AppPath=..\Double Commander\doublecmd.exe
+Commandline=--no-console --client %NewTabSwitch% %Path%
+NewTabSwitch=-T
 ```
-See more examples in FPconnect.ini.
+See more examples and detailed documentation in [FPconnect.ini](https://github.com/rolandtoth/FPconnect/raw/master/FPconnect.ini).
 
 <h3>License</h3>
 

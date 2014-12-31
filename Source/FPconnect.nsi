@@ -30,11 +30,11 @@ OutFile "..\${SNAME}.exe"
 ;-----Version Information------
 LoadLanguageFile "${NSISDIR}\Contrib\Language files\English.nlf"
 
-VIProductVersion "0.1.0.0"
+VIProductVersion "0.3.0.0"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "${SNAME}"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "©rolandtoth 2014"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "${SNAME}"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "0.1"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "0.3"
 
 !macro StrReplaceV4 Var Replace With In
  Push ${Var1}
@@ -66,31 +66,38 @@ VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "0.1"
 !macroend
 
 Var params
-Var app_path
+Var appPath
 Var commandline
+Var newTabSwitch
+Var isNewWindow
+Var isDebugMode
 Var path
 
 Section "Main"
-	
+
+	; get passed parameters
 	${GetParameters} $params
-	
-	ReadINIStr $app_path "$EXEDIR\${SNAME}.ini" "Options" "AppPath"
+
+	; read ini settings
+	ReadINIStr $appPath "$EXEDIR\${SNAME}.ini" "Options" "AppPath"
 	ReadINIStr $commandline "$EXEDIR\${SNAME}.ini" "Options" "Commandline"
+	ReadINIStr $newTabSwitch "$EXEDIR\${SNAME}.ini" "Options" "newTabSwitch"
+	ReadINIStr $isDebugMode "$EXEDIR\${SNAME}.ini" "Options" "DebugMode"
 
 	; expand environment variables
-	ExpandEnvStrings $app_path $app_path
+	ExpandEnvStrings $appPath $appPath
 
 	; check if there are any passed params
-	StrCmp $params "" ErrorMsg-NoParams
-	StrCmp $app_path "" ErrorMsg-AppNotFound
+	StrCmp $params "" errorMsg-noParams
+	StrCmp $appPath "" errorMsg-appNotFound
+
+	; check if external parameters contains "/new"
+	${StrContains} $1 "/new" $params
+	StrCmp $1 "/new" 0 +2
+	StrCpy $isNewWindow 1
 
 	; get path from commandline
-	${StrReplaceV4} $path "/O" "" $params
-	${StrReplaceV4} $path "/T" "" $path
-	${StrReplaceV4} $path "/S" "" $path
-	${StrReplaceV4} $path "/N" "" $path
-	${StrReplaceV4} $path "/L=" "" $path
-	${StrReplaceV4} $path '"' '' $path
+	${StrReplaceV4} $path "/new" "" $params
 
 	; remove whitespace
 	Push $path
@@ -105,25 +112,59 @@ Section "Main"
 	StrCmp $1 " " 0 +2
 	StrCpy $path '"$path"'
 
-	; replace %path% in commandline from the ini
-	${StrReplaceV4} $commandline "%path%" $path $commandline
-	
-	IfFileExists "$app_path" 0 CheckRelativePath
-		Exec '"$app_path" $commandline'
-		Abort
-	
-	CheckRelativePath:
-		IfFileExists "$EXEDIR\$app_path" 0 ErrorMsg-AppNotFound
-			Exec '"$EXEDIR\$app_path" $commandline'
-			Abort
+	; replace %Path% in commandline from the ini
+	${StrReplaceV4} $commandline "%Path%" $path $commandline
 
-	ErrorMsg-AppNotFound:
+	; check application path
+	IfFileExists "$appPath" launchApp 0
+		IfFileExists "$EXEDIR\$appPath" 0 errorMsg-appNotFound
+			StrCpy $appPath "$EXEDIR\$appPath"
+			Goto launchApp
+
+	; launch target application with commandline
+	launchApp:
+
+		; make path absolute
+		GetFullPathName $appPath "$appPath"
+	
+		; process new tab switch
+		StrCmp $isNewWindow "1" 0 executeApp
+
+			; check %NewTabSwitch% placeholder
+			${StrContains} $1 "%NewTabSwitch%" $commandline
+			StrCmp $1 "%NewTabSwitch%" replaceNewTabSwitch appendNewTabSwitch
+			
+				replaceNewTabSwitch:
+				${StrReplaceV4} $commandline "%NewTabSwitch%" $newTabSwitch $commandline
+				Goto executeApp
+
+				appendNewTabSwitch:
+				StrCpy $commandline "$commandline $newTabSwitch"
+
+		executeApp:
+
+			; remove %NewTabSwitch% leftover
+			${StrReplaceV4} $commandline "%NewTabSwitch%" "" $commandline
+
+			; remove double spaces
+			${StrReplaceV4} $commandline "  " " " $commandline
+			
+			StrCmp $isDebugMode 1 0 +2
+				MessageBox MB_OKCANCEL Application:$\n*$appPath*$\n$\nCommandline:$\n*$commandline* IDOK 0 IDCANCEL END
+
+			; execute main application
+			Exec '"$appPath" $commandline'
+			Abort
+	
+	errorMsg-appNotFound:
 		MessageBox MB_OK "Application not found!$\nPlease check ${SNAME}.ini."
 		Abort
 
-	ErrorMsg-NoParams:
-		MessageBox MB_OK "${SNAME} should only be used by Folders Popup internally."
+	errorMsg-noParams:
+		MessageBox MB_OK "${SNAME} should only be used by FoldersPopup internally."
 		Abort
+
+	End:
 
 SectionEnd
 
